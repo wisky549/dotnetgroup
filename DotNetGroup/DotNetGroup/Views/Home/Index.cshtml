@@ -2,21 +2,60 @@
     ViewData["Title"] = "Update feeds";
 }
 <div class="row">
-    <div class="col-md-6">
-        <h1>Update feeds</h1>
-        <div class="form-group">
-            <label>Access token:</label>
-            <input name="token" type="text" class="form-control" />
-        </div>
+    <div class="col-md-12">
+        <h1>Update Users</h1>
         <div class="form-group">
             <label>Query:</label>
-            <input name="query" type="text" class="form-control" />
+            <textarea id="_txt_query" rows="3" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <input type="button" id="_bt_submit" value="Submit" class="btn btn-primary" />
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="button" id="_bt_submit" value="Submit" class="btn btn-primary" />
+                    <input type="button" id="_bt_stop" value="Stop" class="btn btn-info" />
+                </div>
+                <div class="col-md-6 text-right">
+                    <label>Updated: </label><label id="_lb_total">0</label>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <h2>Process</h2>
-    </div>
 </div>
+@section Scripts{
+    <script>
+        var $query = (function () {
+            var _total = 0, _stop = false;
+            var _run = function () {
+                $.post('/api/query/run', { Query: $('#_txt_query').val() }, function (result) {
+                    if (result.success) {
+
+                        _total = _total + result.data.processCount;
+
+                        $('#_lb_total').html(_total);
+
+                        $('#_txt_query').val(result.data.nextQuery);
+
+                        if (!_stop) {
+                            setTimeout($query.run(), 1000);
+                        }
+                    }
+                    else {
+                        alert(result.message);
+                    }
+                });
+            };
+
+            $('#_bt_submit').click(function () {
+                $query.run();
+            });
+
+            $('#_bt_stop').click(function () {
+                _stop = true;
+            });
+
+            return {
+                run: _run
+            };
+        })();
+    </script>
+}

@@ -7,8 +7,8 @@ namespace DNG.Repository.Dapper
 {
     public class QueryRepository : BaseRepository, IQueryRepository
     {
-        public QueryRepository(string con)
-            : base(con)
+        public QueryRepository(IRepoSetting repoSetting)
+            : base(repoSetting)
         {
         }
 
@@ -24,7 +24,7 @@ namespace DNG.Repository.Dapper
 
         public int Insert(QueryEntity entity)
         {
-            using (var con = new SqlConnection(ConStr))
+            using (var con = new SqlConnection(_setting.ConnectionString))
             {
                 con.Open();
 

@@ -11,9 +11,10 @@ using System;
 namespace DNG.Repository.EF.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20180101081047_user")]
+    partial class user
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,10 +27,6 @@ namespace DNG.Repository.EF.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Created");
-
-                    b.Property<string>("Next");
-
-                    b.Property<string>("Query");
 
                     b.HasKey("Id");
 

@@ -1,12 +1,14 @@
-﻿namespace DNG.Repository.Dapper
+﻿using DNG.IRepository;
+
+namespace DNG.Repository.Dapper
 {
     public class BaseRepository
     {
-        public BaseRepository(string connection)
+        public BaseRepository(IRepoSetting repoSetting)
         {
-            ConStr = connection;
+            _setting = repoSetting;
         }
 
-        protected string ConStr { get; set; }
+        protected IRepoSetting _setting;
     }
 }

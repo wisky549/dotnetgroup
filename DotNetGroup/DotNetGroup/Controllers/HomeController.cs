@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace DotNetGroup.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public HomeController(QueryBusiness queryBusiness)
         {

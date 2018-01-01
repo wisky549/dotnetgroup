@@ -22,10 +22,16 @@ namespace DotNetGroup
             services.AddMvc();
 
             services.AddTransient<QueryBusiness>();
-            services.AddTransient<IQueryRepository, QueryRepository>((config) =>
+            services.AddTransient<IRepoSetting, RepoSetting>((config) =>
             {
-                return new QueryRepository(Configuration.GetConnectionString("DefaultConnection"));
+                return new RepoSetting
+                {
+                    ConnectionString = Configuration.GetConnectionString("DefaultConnection")
+                };
             });
+
+            services.AddTransient<IQueryRepository, QueryRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
