@@ -1,31 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using DNG.Business;
 using DotNetGroup.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace DotNetGroup.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController(QueryBusiness queryBusiness)
+        {
+            _query = queryBusiness;
+        }
+
+        QueryBusiness _query;
+
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

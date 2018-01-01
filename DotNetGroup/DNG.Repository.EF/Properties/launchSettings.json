@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DNG.Repository.EF": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

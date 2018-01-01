@@ -12,4 +12,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DNG.Business\DNG.Business.csproj" />
+    <ProjectReference Include="..\DNG.Repository.Dapper\DNG.Repository.Dapper.csproj" />
+  </ItemGroup>
+
 </Project>
