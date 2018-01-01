@@ -16,14 +16,27 @@ namespace DotNetGroup.Controllers
 
         QueryBusiness _business;
 
-        [Route("run")]
-        public async Task<Rep<QueryResultModel>> Run(QueryModel model)
+        [Route("user")]
+        public async Task<Rep<QueryResultModel>> UpdateUser(QueryModel model)
         {
             var rep = GetRep<QueryResultModel>(ModelState);
 
             if (rep.Success)
             {
                 rep = await _business.UpdateUsersAsync(model);
+            }
+
+            return rep;
+        }
+
+        [Route("feed")]
+        public async Task<Rep<QueryResultModel>> UpdateFeed(QueryModel model)
+        {
+            var rep = GetRep<QueryResultModel>(ModelState);
+
+            if (rep.Success)
+            {
+                rep = await _business.UpdateFeedsAsync(model);
             }
 
             return rep;

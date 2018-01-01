@@ -9,6 +9,10 @@ namespace DNG.Repository.EF
 
         public DbSet<UserEntity> User { get; set; }
 
+        public DbSet<PostEntity> Post { get; set; }
+
+        public DbSet<CommentEntity> Comment { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=.;Database=DotNetGroup;Trusted_Connection=True;");

@@ -11,9 +11,10 @@ using System;
 namespace DNG.Repository.EF.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20180101101750_commentpost")]
+    partial class commentpost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +33,8 @@ namespace DNG.Repository.EF.Migrations
                     b.Property<long>("Fb_from");
 
                     b.Property<string>("Fb_message");
+
+                    b.Property<string>("Fb_permalink_url");
 
                     b.Property<int>("ForPostId");
 
@@ -70,8 +73,6 @@ namespace DNG.Repository.EF.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Created");
-
-                    b.Property<string>("Group");
 
                     b.Property<string>("Next");
 

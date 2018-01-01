@@ -1,15 +1,15 @@
-﻿using DNG.Entity.Interfaces;
+﻿using System.Threading.Tasks;
 
 namespace DNG.IRepository
 {
-    public interface IBaseRepository<T> where T: IEntity
+    public interface IBaseRepository<T> where T: class
     {
-        T Get(int id);
+        Task<T> GetAsync(int id);
 
-        int Insert(T entity);
+        Task<int> InsertAsync(T entity);
 
-        bool Update(T entity);
+        Task<bool> UpdateAsync(T entity);
 
-        bool Delete(T entity);
+        Task<bool> DeleteAsync(T entity);
     }
 }

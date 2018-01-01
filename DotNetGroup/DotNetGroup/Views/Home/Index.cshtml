@@ -5,17 +5,33 @@
     <div class="col-md-12">
         <h1>Update Users</h1>
         <div class="form-group">
-            <label>Query:</label>
-            <textarea id="_txt_query" rows="3" class="form-control"></textarea>
+            <label>User update query:</label>
+            <textarea id="_user_txt_query" rows="3" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <input type="button" id="_bt_submit" value="Submit" class="btn btn-primary" />
-                    <input type="button" id="_bt_stop" value="Stop" class="btn btn-info" />
+                    <input type="button" id="_user_bt_submit" value="Submit" class="btn btn-primary" />
+                    <input type="button" id="_user_bt_stop" value="Stop" class="btn btn-info" />
                 </div>
                 <div class="col-md-6 text-right">
-                    <label>Updated: </label><label id="_lb_total">0</label>
+                    <label>Updated: </label><label id="_user_lb_total">0</label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label>Feed update query:</label>
+            <textarea id="_feed_txt_query" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="button" id="_feed_bt_submit" value="Submit" class="btn btn-primary" />
+                    <input type="button" id="_feed_bt_stop" value="Stop" class="btn btn-info" />
+                </div>
+                <div class="col-md-6 text-right">
+                    <label>Updated: </label><label id="_feed_lb_total">0</label>
                 </div>
             </div>
         </div>
@@ -23,20 +39,20 @@
 </div>
 @section Scripts{
     <script>
-        var $query = (function () {
+        var $updateUser = (function () {
             var _total = 0, _stop = false;
             var _run = function () {
-                $.post('/api/query/run', { Query: $('#_txt_query').val() }, function (result) {
+                $.post('/api/query/user', { Query: $('#_user_txt_query').val() }, function (result) {
                     if (result.success) {
 
                         _total = _total + result.data.processCount;
 
-                        $('#_lb_total').html(_total);
+                        $('#_user_lb_total').html(_total);
 
-                        $('#_txt_query').val(result.data.nextQuery);
+                        $('#_user_txt_query').val(result.data.nextQuery);
 
                         if (!_stop) {
-                            setTimeout($query.run(), 1000);
+                            setTimeout($updateUser.run(), 1000);
                         }
                     }
                     else {
@@ -45,11 +61,46 @@
                 });
             };
 
-            $('#_bt_submit').click(function () {
-                $query.run();
+            $('#_user_bt_submit').click(function () {
+                $updateUser.run();
             });
 
-            $('#_bt_stop').click(function () {
+            $('#_user_bt_stop').click(function () {
+                _stop = true;
+            });
+
+            return {
+                run: _run
+            };
+        })();
+
+        var $updateFeed = (function () {
+            var _total = 0, _stop = false;
+            var _run = function () {
+                $.post('/api/query/feed', { Query: $('#_feed_txt_query').val() }, function (result) {
+                    if (result.success) {
+
+                        _total = _total + result.data.processCount;
+
+                        $('#_feed_lb_total').html(_total);
+
+                        $('#_feed_txt_query').val(result.data.nextQuery);
+
+                        if (!_stop) {
+                            setTimeout($updateFeed.run(), 1500);
+                        }
+                    }
+                    else {
+                        alert(result.message);
+                    }
+                });
+            };
+
+            $('#_feed_bt_submit').click(function () {
+                $updateFeed.run();
+            });
+
+            $('#_feed_bt_stop').click(function () {
                 _stop = true;
             });
 

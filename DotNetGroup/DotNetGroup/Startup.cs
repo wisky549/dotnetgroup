@@ -21,7 +21,6 @@ namespace DotNetGroup
         {
             services.AddMvc();
 
-            services.AddTransient<QueryBusiness>();
             services.AddTransient<IRepoSetting, RepoSetting>((config) =>
             {
                 return new RepoSetting
@@ -30,8 +29,11 @@ namespace DotNetGroup
                 };
             });
 
+            services.AddTransient<QueryBusiness>();
             services.AddTransient<IQueryRepository, QueryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

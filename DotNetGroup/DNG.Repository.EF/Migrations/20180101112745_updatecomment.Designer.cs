@@ -11,9 +11,10 @@ using System;
 namespace DNG.Repository.EF.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20180101112745_updatecomment")]
+    partial class updatecomment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,8 +71,6 @@ namespace DNG.Repository.EF.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Created");
-
-                    b.Property<string>("Group");
 
                     b.Property<string>("Next");
 

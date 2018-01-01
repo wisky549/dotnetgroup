@@ -11,6 +11,8 @@ namespace DNG.Entity
         [Key]
         public int Id { get; set; }
 
+        public string Group { get; set; }
+
         public string Query { get; set; }
 
         public string Next { get; set; }

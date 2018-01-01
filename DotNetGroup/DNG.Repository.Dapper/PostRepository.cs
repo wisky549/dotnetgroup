@@ -3,9 +3,9 @@ using DNG.IRepository;
 
 namespace DNG.Repository.Dapper
 {
-    public class QueryRepository : BaseRepository<QueryEntity>, IQueryRepository
+    public class PostRepository : BaseRepository<PostEntity>, IPostRepository
     {
-        public QueryRepository(IRepoSetting repoSetting)
+        public PostRepository(IRepoSetting repoSetting)
             : base(repoSetting)
         {
         }
